@@ -886,6 +886,10 @@ MonoBehaviour:
   PlayerSpeed: 10
   PlayerJumpForce: 2
   Gravity: -10
+  CurrentFuelJetPack: 0
+  JetPackForce: 0.1
+  LoadingJetPackSpeed: 0.5
+  FuelJetPackMax: 50
   PlayerFeet: {fileID: 1612668331}
   GroundMask:
     serializedVersion: 2

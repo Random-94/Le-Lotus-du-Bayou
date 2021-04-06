@@ -12,7 +12,13 @@ public class Playerbehaviour : MonoBehaviour
     [SerializeField] private float PlayerTurnSpeed;
     [SerializeField] private float PlayerSpeed;
     [SerializeField] private float PlayerJumpForce;
+
     [SerializeField] private float Gravity;
+
+    [SerializeField] private float CurrentFuelJetPack;
+    [SerializeField] private float JetPackForce;
+    [SerializeField] private float LoadingJetPackSpeed;
+
     [SerializeField, Range(0,100)] private float FuelJetPackMax;
 
     [SerializeField] private Transform PlayerFeet;
@@ -27,6 +33,7 @@ public class Playerbehaviour : MonoBehaviour
     private bool isJumping;
     private bool isThrowing;
     private bool JetPackOn;
+    private bool CanUseJetPack;
 
     private Vector3 PlayerMove;
     private Vector3 DirectionToMove;
@@ -55,7 +62,7 @@ public class Playerbehaviour : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        CurrentFuelJetPack = FuelJetPackMax;
     }
 
     // Update is called once per frame
@@ -64,6 +71,20 @@ public class Playerbehaviour : MonoBehaviour
         DirectionToMove = ApplyMove() + ApplyJumpJetPack() + ApplyGravity();
 
         CharaController.Move(DirectionToMove * Time.deltaTime);
+
+        if(JetPackOn)
+        {
+            CanUseJetPack = true;
+            CurrentFuelJetPack -= 1;
+            Debug.Log(CurrentFuelJetPack);
+
+            if(CurrentFuelJetPack <= 0)
+            {
+                JetPackOn = false;
+            }
+        }
+
+        ReFuelJetPack();
     }
 
     private Vector3 ApplyMove()
@@ -96,7 +117,19 @@ public class Playerbehaviour : MonoBehaviour
             var JumpVector = new Vector3(0, heightSpeed, 0); 
             return JumpVector;
         }
+        else if (isJumping == false && JetPackOn && CurrentFuelJetPack > 0)
+        {
+            var JetPackAscending = Mathf.Sqrt(JetPackForce);
+            var JetPackVector = new Vector3(0, JetPackAscending, 0);
+            Debug.Log("Yahou");
 
+            if (CurrentFuelJetPack == 0)
+            {
+                JetPackOn = false;
+            }
+
+            return JetPackVector;
+        }
         return Vector3.zero;
     }
 
@@ -117,6 +150,14 @@ public class Playerbehaviour : MonoBehaviour
         }
 
         return DirectionToFall;
+    }
+
+    private void ReFuelJetPack()
+    {
+        if(JetPackOn == false && CurrentFuelJetPack < FuelJetPackMax)
+        {
+            CurrentFuelJetPack += LoadingJetPackSpeed;
+        }
     }
 
     private void OnMovePerformed(InputAction.CallbackContext obj)
