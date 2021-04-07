@@ -9,6 +9,8 @@ public class Playerbehaviour : MonoBehaviour
     [SerializeField] private CinemachineVirtualCamera CinemachineCam;
     [SerializeField] private Camera Camera;
 
+    [SerializeField] private GameObject PrefabToInstantiate;
+
     [SerializeField] private float PlayerTurnSpeed;
     [SerializeField] private float PlayerSpeed;
     [SerializeField] private float PlayerJumpForce;
@@ -19,9 +21,10 @@ public class Playerbehaviour : MonoBehaviour
     [SerializeField] private float JetPackForce;
     [SerializeField] private float LoadingJetPackSpeed;
 
-    [SerializeField, Range(0,100)] private float FuelJetPackMax;
+    [SerializeField, Range(0, 100)] private float FuelJetPackMax;
 
     [SerializeField] private Transform PlayerFeet;
+    [SerializeField] private Transform PlayerHand;
 
     [SerializeField] LayerMask GroundMask;
 
@@ -31,9 +34,10 @@ public class Playerbehaviour : MonoBehaviour
     private Vector2 direction;
 
     private bool isJumping;
-    private bool isThrowing;
     private bool JetPackOn;
     private bool CanUseJetPack;
+
+    [HideInInspector] public bool isThrowing;
 
     private Vector3 PlayerMove;
     private Vector3 DirectionToMove;
@@ -72,13 +76,13 @@ public class Playerbehaviour : MonoBehaviour
 
         CharaController.Move(DirectionToMove * Time.deltaTime);
 
-        if(JetPackOn)
+        if (JetPackOn)
         {
             CanUseJetPack = true;
             CurrentFuelJetPack -= 1;
             Debug.Log(CurrentFuelJetPack);
 
-            if(CurrentFuelJetPack <= 0)
+            if (CurrentFuelJetPack <= 0)
             {
                 JetPackOn = false;
             }
@@ -89,10 +93,10 @@ public class Playerbehaviour : MonoBehaviour
 
     private Vector3 ApplyMove()
     {
-        if(PlayerMove == Vector3.zero)
+        if (PlayerMove == Vector3.zero)
         {
             var rotation2 = Quaternion.LookRotation(PlayerMove);
-            rotation2 *= Quaternion.Euler(0, Camera.transform.rotation.eulerAngles.y, 0); 
+            rotation2 *= Quaternion.Euler(0, Camera.transform.rotation.eulerAngles.y, 0);
             transform.rotation = Quaternion.RotateTowards(transform.rotation, rotation2, PlayerTurnSpeed * Time.deltaTime);
 
             PlayerOrientation = rotation2 * Vector3.zero;
@@ -114,14 +118,13 @@ public class Playerbehaviour : MonoBehaviour
         if (isJumping && DirectionToMove.y == 0)
         {
             var heightSpeed = Mathf.Sqrt(PlayerJumpForce * -2 * Gravity);
-            var JumpVector = new Vector3(0, heightSpeed, 0); 
+            var JumpVector = new Vector3(0, heightSpeed, 0);
             return JumpVector;
         }
         else if (isJumping == false && JetPackOn && CurrentFuelJetPack > 0)
         {
             var JetPackAscending = Mathf.Sqrt(JetPackForce);
             var JetPackVector = new Vector3(0, JetPackAscending, 0);
-            Debug.Log("Yahou");
 
             if (CurrentFuelJetPack == 0)
             {
@@ -142,7 +145,7 @@ public class Playerbehaviour : MonoBehaviour
 
         if (Groundraycast)
         {
-            DirectionToMove.y = 0; 
+            DirectionToMove.y = 0;
         }
         else
         {
@@ -154,7 +157,7 @@ public class Playerbehaviour : MonoBehaviour
 
     private void ReFuelJetPack()
     {
-        if(JetPackOn == false && CurrentFuelJetPack < FuelJetPackMax)
+        if (JetPackOn == false && CurrentFuelJetPack < FuelJetPackMax)
         {
             CurrentFuelJetPack += LoadingJetPackSpeed;
         }
@@ -189,7 +192,7 @@ public class Playerbehaviour : MonoBehaviour
     private void OnJetPackPerformed(InputAction.CallbackContext obj)
     {
         JetPackOn = true;
-        
+
     }
 
     private void OnJetPackCanceled(InputAction.CallbackContext obj)
@@ -200,7 +203,7 @@ public class Playerbehaviour : MonoBehaviour
     private void OnThrowPerformed(InputAction.CallbackContext obj)
     {
         isThrowing = true;
-        Debug.Log("Throw OK");
+        Instantiate(PrefabToInstantiate, PlayerHand.transform.position, Quaternion.identity);
     }
 
     private void OnThrowCanceled(InputAction.CallbackContext obj)
@@ -208,3 +211,4 @@ public class Playerbehaviour : MonoBehaviour
         isThrowing = false;
     }
 }
+
