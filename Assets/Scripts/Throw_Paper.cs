@@ -73,6 +73,8 @@ public class Throw_Paper : MonoBehaviour
             myRB.useGravity = false;
 
             myRB.AddForce(Vector3.zero);
+
+            PlanCloth.useGravity = false;
         }
     }
 
