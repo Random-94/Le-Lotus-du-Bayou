@@ -39,6 +39,8 @@ public class Playerbehaviour : MonoBehaviour
     private bool JetPackOn;
     private bool CanUseJetPack;
 
+    private AudioSource audioSource;
+
     [HideInInspector] public bool isThrowing;
 
     private Vector3 PlayerMove;
@@ -63,6 +65,8 @@ public class Playerbehaviour : MonoBehaviour
         controls.Player.Throw.canceled += OnThrowCanceled;
 
         CharaController = GetComponent<CharacterController>();
+
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Start is called before the first frame update
@@ -92,6 +96,12 @@ public class Playerbehaviour : MonoBehaviour
         }
 
         ReFuelJetPack();
+
+        /*if (JetPackOn)
+        {
+            audioSource.Play();
+        }
+        else audioSource.Stop();*/
     }
 
     private Vector3 ApplyMove()
@@ -197,11 +207,13 @@ public class Playerbehaviour : MonoBehaviour
     private void OnJetPackPerformed(InputAction.CallbackContext obj)
     {
         JetPackOn = true;
+        audioSource.Play();
     }
 
     private void OnJetPackCanceled(InputAction.CallbackContext obj)
     {
         JetPackOn = false;
+        audioSource.Stop();
     }
 
     private void OnThrowPerformed(InputAction.CallbackContext obj)
