@@ -8,39 +8,20 @@ public class Throw_Paper : MonoBehaviour
     [SerializeField] private GameObject ChildPlane;
     [SerializeField] private GameObject EmptyEnd;
 
-    [SerializeField] private GameObject[] GameObjectArray;
-    [SerializeField] private CapsuleCollider[] CapsuleColliderArray;
-
     private bool IsThrowing;
 
     private Rigidbody myRB;
     private Transform PlanTransform;
     private Cloth PlanCloth;
 
-    private CapsuleCollider capsule;
-    public GameObject gjgjg;
-
     // Start is called before the first frame update
     void Start()
     {
+
         myRB = GetComponent<Rigidbody>();
         PlanTransform = ChildPlane.GetComponent<Transform>();
         PlanCloth = ChildPlane.GetComponent<Cloth>();
 
-        GameObjectArray = GameObject.FindGameObjectsWithTag("Capsule");
-        
-        //CapsuleColliderArray = CapsuleCollider.FindObjectOfType(CapsuleCollider);
-
-        //capsule = GameObject.FindWithTag("Capsule");
-
-        for (int i = 0; i < GameObjectArray.Length; i++)
-        {
-            capsule = GetComponent<CapsuleCollider>();
-            PlanCloth.capsuleColliders.SetValue(capsule, i);
- 
-        }
-
-        
     }
 
     // Update is called once per frame
@@ -69,9 +50,8 @@ public class Throw_Paper : MonoBehaviour
         {
             Debug.Log("Bruuuuuh");
             myRB.constraints = RigidbodyConstraints.FreezePosition;
-            myRB.constraints = RigidbodyConstraints.FreezeRotation;
-            //PlanCloth.useGravity = false;
-            //PlanTransform.rotation = Vector3.zero;
+            //myRB.constraints = RigidbodyConstraints.FreezeRotation;
+
             myRB.AddForce(Vector3.zero);
         }
     }

@@ -4,27 +4,13 @@ using UnityEngine;
 
 public class Test : MonoBehaviour
 {
+    [SerializeField] private GameObject leCloth;
+    [SerializeField] private GameObject leCollider;
 
-
-    public GameObject leCloth;
-    public GameObject leCollider;
-
-
-    public CapsuleCollider[] test1;
-
-
-
-
-
-
-
+    [SerializeField] private CapsuleCollider[] test1;
 
     void Start()
     {
-
-
-
-
         leCloth.GetComponent<Cloth>().capsuleColliders = test1; 
     }
 

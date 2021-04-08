@@ -9,6 +9,8 @@ public class Playerbehaviour : MonoBehaviour
     [SerializeField] private CinemachineVirtualCamera CinemachineCam;
     [SerializeField] private Camera Camera;
 
+    [SerializeField] private Fuel fuelScript;
+
     [SerializeField] private GameObject PrefabToInstantiate;
 
     [SerializeField] private float PlayerTurnSpeed;
@@ -67,6 +69,7 @@ public class Playerbehaviour : MonoBehaviour
     void Start()
     {
         CurrentFuelJetPack = FuelJetPackMax;
+        fuelScript.SetMaxFuel(FuelJetPackMax);
     }
 
     // Update is called once per frame
@@ -160,6 +163,8 @@ public class Playerbehaviour : MonoBehaviour
         if (JetPackOn == false && CurrentFuelJetPack < FuelJetPackMax)
         {
             CurrentFuelJetPack += LoadingJetPackSpeed;
+
+            fuelScript.SetFuel(CurrentFuelJetPack);
         }
     }
 
@@ -192,7 +197,6 @@ public class Playerbehaviour : MonoBehaviour
     private void OnJetPackPerformed(InputAction.CallbackContext obj)
     {
         JetPackOn = true;
-
     }
 
     private void OnJetPackCanceled(InputAction.CallbackContext obj)
