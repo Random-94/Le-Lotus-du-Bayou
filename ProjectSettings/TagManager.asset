@@ -10,6 +10,7 @@ TagManager:
   - House
   - Ground
   - Capsule
+  - ToiletPaper
   layers:
   - Default
   - TransparentFX

@@ -1,63 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &5465479452578661626
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 523999151176628925}
-  - component: {fileID: 2372654642024248244}
-  - component: {fileID: 3718231537517907416}
-  m_Layer: 0
-  m_Name: GameObject
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &523999151176628925
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5465479452578661626}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.3, z: -15.95}
-  m_LocalScale: {x: 1.9854, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 8957287764268394222}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &2372654642024248244
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5465479452578661626}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &3718231537517907416
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5465479452578661626}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b10320252380f1b4594b635b2d8aa2ee, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ChildPlane: {fileID: 8957287764577191213}
 --- !u!1 &8957287764268394219
 GameObject:
   m_ObjectHideFlags: 0
@@ -74,7 +16,7 @@ GameObject:
   - component: {fileID: 8957287764268394221}
   m_Layer: 0
   m_Name: Paper_Head
-  m_TagString: Untagged
+  m_TagString: ToiletPaper
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -91,7 +33,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 0.73678}
   m_Children:
   - {fileID: 8957287764577191212}
-  - {fileID: 523999151176628925}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -187,7 +128,29 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ThrowForce: 3
   ChildPlane: {fileID: 8957287764577191213}
-  EmptyEnd: {fileID: 5465479452578661626}
+  Player: {fileID: 1998397860027418499, guid: f2c2412666127b6469c3c67e8bd0cfac, type: 3}
+  leCloth: {fileID: 8957287764577191213}
+  Collider1: {fileID: 3952244810583057486, guid: fa01e7a30b79457408192245b5466466, type: 3}
+  Collider2: {fileID: 7822723327786976575, guid: 42f17b9ed81a35d4a8a3b7ec9a4a7e7f, type: 3}
+  Collider3: {fileID: 4260502362655473548, guid: b236a3fa7ddd548438075429dbff499a, type: 3}
+  Collider4: {fileID: 6797927335872732284, guid: 8982f2251fb1532438e9d2fa1da05abf, type: 3}
+  Collider5: {fileID: 1812819454406301105, guid: 3fbf9318d189b554bbe4cc3f57166cac, type: 3}
+  Collider6: {fileID: 4451353355351014707, guid: 7385549b624e6f748ac367b63d4af9a7, type: 3}
+  Collider7: {fileID: 1487750239340700640, guid: c56776a6a3551bc4eacbdc9ac05e5344, type: 3}
+  Collider8: {fileID: 5898404531634459057, guid: 4ce1b79d6c3ce634581854b4c45ae543, type: 3}
+  Collider9: {fileID: 2189071370497173594, guid: 77c9f69e73481f946842c6db88c17ff9, type: 3}
+  Collider10: {fileID: 509347135283394150, guid: c5782244ec2984946bfb3e9689efd98f, type: 3}
+  CapsuleColliderArray:
+  - {fileID: 3952244810583057487, guid: fa01e7a30b79457408192245b5466466, type: 3}
+  - {fileID: 7822723327786976572, guid: 42f17b9ed81a35d4a8a3b7ec9a4a7e7f, type: 3}
+  - {fileID: 4260502362655473549, guid: b236a3fa7ddd548438075429dbff499a, type: 3}
+  - {fileID: 6797927335872732287, guid: 8982f2251fb1532438e9d2fa1da05abf, type: 3}
+  - {fileID: 1812819454406301104, guid: 3fbf9318d189b554bbe4cc3f57166cac, type: 3}
+  - {fileID: 7647861800475453201, guid: 7385549b624e6f748ac367b63d4af9a7, type: 3}
+  - {fileID: 7266372552507111193, guid: c56776a6a3551bc4eacbdc9ac05e5344, type: 3}
+  - {fileID: 1012108978272983663, guid: 4ce1b79d6c3ce634581854b4c45ae543, type: 3}
+  - {fileID: 1525103594924700920, guid: 77c9f69e73481f946842c6db88c17ff9, type: 3}
+  - {fileID: 6899933444665886457, guid: c5782244ec2984946bfb3e9689efd98f, type: 3}
 --- !u!1 &8957287764577191213
 GameObject:
   m_ObjectHideFlags: 0
